@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Garbage</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: white;
+            font-family: monospace;
+            overflow: hidden;
+            white-space: pre-wrap;
+        }
+
+        #garbage {
+            padding: 10px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div id="garbage"></div>
+
+    <script>
+        const chars =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" +
+            "!@#$%^&*()_+-=[]{};:'\",.<>/?\\|`~" +
+            "░▒▓█▄▀■□◆◇○●△▽";
+
+        const output = document.getElementById("garbage");
+
+        function randomGarbage(length) {
+            let text = "";
+
+            for (let i = 0; i < length; i++) {
+                text += chars[Math.floor(Math.random() * chars.length)];
+
+                if (Math.random() < 0.015)
+                    text += "\n";
+            }
+
+            return text;
+        }
+
+        function update() {
+            output.textContent = randomGarbage(10000);
+        }
+
+        update();
+        setInterval(update, 100);
+    </script>
+</body>
+</html>
