@@ -4,14 +4,16 @@
     <title>To Observe A Fungus</title>
 
     <style>
-        body {
-             @font-face {
+        @font-face {
             font-family: 'MyCustomFont';
-                 url('fonts/MyFont.ttf') format('truetype');
+            src: url('fonts/MyFont.ttf') format('truetype');
+        }
+
+        body {
             margin: 0;
             background: black;
             color: green;
-            font-family: monospace;
+            font-family: 'MyCustomFont', monospace;
             font-size: 32px;
             overflow: hidden;
             cursor: pointer;
