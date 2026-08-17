@@ -13,45 +13,41 @@
             background: black;
             color: green;
             font-family: "MyFont", monospace;
-            font-size: 24px
             overflow: hidden;
             white-space: pre-wrap;
         }
 
-        #garbage {
+        #content {
             padding: 10px;
             word-break: break-all;
         }
     </style>
 </head>
+
 <body>
-    <div id="garbage"></div>
+    <div id="content"></div>
 
     <script>
-        const chars =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const output = document.getElementById("content");
 
-        const output = document.getElementById("garbage");
+        fetch("content.txt")
+            .then(response => response.text())
+            .then(text => {
+                let position = 0;
 
-        function randomGarbage(length) {
-            let text = "";
+                function printCharacter() {
+                    if (position < text.length) {
+                        output.textContent += text[position];
+                        position++;
+                        setTimeout(printCharacter, 1000 / 8);
+                    }
+                }
 
-            for (let i = 0; i < length; i++) {
-                text += chars[Math.floor(Math.random() * chars.length)];
-
-                if (Math.random() < 0.015)
-                    text += "\n";
-            }
-
-            return text;
-        }
-
-        function update() {
-            output.textContent = randomGarbage(100);
-        }
-
-        update();
-        setInterval(update, 100);
+                printCharacter();
+            })
+            .catch(error => {
+                output.textContent = "ERROR: " + error;
+            });
     </script>
 </body>
 </html>
